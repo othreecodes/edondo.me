@@ -155,3 +155,8 @@ EL_PAGINATION_PER_PAGE = 12
 # ]
 # SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
 # SOCIAL_AUTH_GOOGLE_PLUS_USE_DEPRECATED_API = True
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
