@@ -1,0 +1,1 @@
+web: gunicorn edondome.wsgi --log-file -
