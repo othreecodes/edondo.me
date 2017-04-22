@@ -43,9 +43,6 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script type='text/javascript'
-            src='//platform-api.sharethis.com/js/sharethis.js#property=58fbca292fe73a0012cb521b&product=inline-share-buttons'
-            async='async'></script>
 </head>
 
 <body>
@@ -100,6 +97,7 @@
                         <p>Hey {{ request.user.first_name }}, What's bothering you today?</p>
                         <form action="" method="post">
                             {% csrf_token %}
+
                             <textarea class="form-control" name="complaint" rows="8" minlength="50"></textarea>
                             <button class="btn btn-primary btn-social">Tell Us</button>
                         </form>
@@ -133,9 +131,7 @@
                         <div class="title">
                             <a>{{ complaint.user.first_name }} {{ complaint.user.last_name }}</a>
                         </div>
-
                         <p class="comp-text">{{ complaint.text }}</p>
-                        <div class="sharethis-inline-share-buttons"></div>
                         <button class="btn btn-primary btn-sm pull-left"><i class="fa fa-comment"></i></button>
                     </div>
                 </div>
@@ -265,6 +261,6 @@
     setTimeout("ga('send','event','Profitable Engagement','time on page more than 1 minutes')", 60000);
 
 </script>
-
 </body>
+
 </html>

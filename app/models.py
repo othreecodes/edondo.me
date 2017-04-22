@@ -5,7 +5,14 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Complaint(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     time = models.DateTimeField(auto_now=True)
     private = models.BooleanField(default=False)
+
+
+class Comments(models.Model):
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commenter')
+    complaint = models.ForeignKey(User, on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now=True)
+    comment = models.TextField()

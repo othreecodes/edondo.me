@@ -1,6 +1,7 @@
 import hashlib
 import urllib
 
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
 from .models import *
@@ -42,3 +43,23 @@ def delete(request):
                 complaint.delete()
 
     return redirect('index')
+
+
+class ComplaintView(DetailView):
+    model = Complaint
+    context_object_name = 'complaints'
+    template_name = 'app/singlepost.html'
+
+
+    def post(self, request):
+        complaint = request.POST.get('complaint') or None
+        if complaint is None or not request.user.is_authenticated:
+            pass
+        else:
+            com = Complaint(user=request.user, text=complaint)
+            com.save()
+            complaint = Complaint.objects.all().order_by('id').reverse()
+            context = {
+                "complaints": complaint
+            }
+        return render(request, 'app/index.html', context)
