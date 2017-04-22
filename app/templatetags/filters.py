@@ -27,5 +27,5 @@ def gravatar(email, size=40):
 @register.filter
 def get_random_image(request):
     logos = ['12.jpg', '16.jpg', '19.jpg', '27.jpg']
-    pos = random.randrange(0, 3)
+    pos = random.randrange(0, 4)
     return logos[pos]
