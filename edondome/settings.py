@@ -80,19 +80,12 @@ WSGI_APPLICATION = 'edondome.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-DATABASES = {
-    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2oqfdrltm94i6',
-        'USER': 'yaqdbcosgciqnt',
+        'NAME': 'd6ubk8e1babppv',
+        'USER': 'yrovnmuviksrix',
         'PORT': '5432',
-        'PASSWORD': 'c38350dff3518f10f5365c47b0c9b896a70f6ebb5d15af9b5e4869ba49b4ceee',
-        'HOST': 'ec2-176-34-110-252.eu-west-1.compute.amazonaws.com',
+        'PASSWORD': '3fe4e311bc57b27ac161f2ed9d2b25f1018d08db2689ef5ef8add5bb4db38575',
+        'HOST': 'ec2-23-21-76-49.compute-1.amazonaws.com',
 
     }
 }
