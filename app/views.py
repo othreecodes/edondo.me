@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from .models import *
 from django.contrib.auth import logout
 from django.http.response import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 
 # Create your views here.
@@ -45,21 +45,15 @@ def delete(request):
     return redirect('index')
 
 
-class ComplaintView(DetailView):
-    model = Complaint
-    context_object_name = 'complaints'
-    template_name = 'app/singlepost.html'
+def single(request, pk):
+    if request.method == "POST":
+        com = get_object_or_404(Complaint, pk=pk)
+        text = request.POST.get("comment") or None
+        comment = Comment(commenter=request.user, complaint=com, comment=text)
+        comment.save()
 
+    context = {
+        'com': get_object_or_404(Complaint, pk=pk)
+    }
 
-    def post(self, request):
-        complaint = request.POST.get('complaint') or None
-        if complaint is None or not request.user.is_authenticated:
-            pass
-        else:
-            com = Complaint(user=request.user, text=complaint)
-            com.save()
-            complaint = Complaint.objects.all().order_by('id').reverse()
-            context = {
-                "complaints": complaint
-            }
-        return render(request, 'app/index.html', context)
+    return render(request, 'app/singlepost.html', context)

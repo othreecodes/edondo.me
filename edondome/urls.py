@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('social_django.urls', namespace='social')),
     url(r'^$', view=views.IndexView.as_view(), name='index'),
-    url(r'^delete/$', view=views.delete, name='delete')
+    url(r'^delete/$', view=views.delete, name='delete'),
+    url(r'^complaint/(?P<pk>[0-9]+)/$', view=views.single, name='view')
 ]
 urlpatterns += staticfiles_urlpatterns()

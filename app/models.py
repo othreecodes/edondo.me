@@ -11,8 +11,10 @@ class Complaint(models.Model):
     private = models.BooleanField(default=False)
 
 
-class Comments(models.Model):
+class Comment(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commenter')
-    complaint = models.ForeignKey(User, on_delete=models.CASCADE)
+    complaint = models.ForeignKey(Complaint, on_delete=models.CASCADE)
     time = models.DateTimeField(auto_now=True)
     comment = models.TextField()
+
+

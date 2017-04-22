@@ -125,6 +125,8 @@
                             <a href="/delete/?id={{ complaint.id }}" class="btn btn-danger btn-sm pull-right"
                                style="padding: 5px">&times;</a>
                         {% endif %}
+                     <a href="/complaint/{{ complaint.id }}" class="btn btn-embossed btn-success btn-sm pull-left"
+                               style="padding: 5px"><i class="fa fa-eye"></i></a>
                     </div>
                     <div class="avatar">
                         <img alt="" src="{{ complaint.user.email|gravatar_url }}">
@@ -137,7 +139,7 @@
                         <p class="comp-text">{{ complaint.text }}</p>
                         <div class="sharethis-inline-share-buttons"
                              data-url="http://edondo.me/complaint/{{ complaint.id }}"></div>
-                        <button class="btn btn-primary btn-sm pull-left"><i class="fa fa-comment"></i></button>
+                        <a href="http://edondo.me/complaint/{{ complaint.id }}" class="btn btn-sm btn-default pull-left comment-btn"><i class="fa fa-comment"></i>{{ complaint.comment_set.all.count }}</a>
                     </div>
                 </div>
 
