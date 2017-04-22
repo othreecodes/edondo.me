@@ -15,7 +15,7 @@ class IndexView(ListView):
     model = Complaint
     context_object_name = 'complaints'
     template_name = 'app/index.html'
-    ordering = 'id'
+    ordering = '-id'
 
     def post(self, request):
         complaint = request.POST.get('complaint') or None
@@ -24,7 +24,7 @@ class IndexView(ListView):
         else:
             com = Complaint(user=request.user, text=complaint)
             com.save()
-            complaint = Complaint.objects.all()
+            complaint = Complaint.objects.all().order_by('id').reverse()
             context = {
                 "complaints": complaint
             }
