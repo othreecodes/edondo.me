@@ -42,7 +42,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
- <script type='text/javascript'
+    <script type='text/javascript'
             src='//platform-api.sharethis.com/js/sharethis.js#property=58fbca292fe73a0012cb521b&product=inline-reaction-buttons'
             async='async'></script>
 </head>
@@ -97,7 +97,7 @@
                     {% else %}
 
                         <p>Hey {{ request.user.first_name }}, What's bothering you today?</p>
-                        <form action="" method="post">
+                        <form action="/" method="post">
                             {% csrf_token %}
 
                             <textarea class="form-control" name="complaint" rows="8" minlength="50"></textarea>
@@ -116,9 +116,10 @@
     <blockquote class="blockquote"><p>{{ com.text }}</p>
         <br>
         - by {{ com.user.first_name }} {{ com.user.last_name }}
+
     </blockquote>
 
-    <div class="container bootstrap snippet">
+    <div class="bootstrap snippet">
         <div class="row">
             <div class="col-md-12">
                 <div class="blog-comment">
@@ -143,21 +144,21 @@
                         {% endfor %}
 
                     </ul>
-                {% if request.user.is_authenticated %}
-                    <p>Add yours</p>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="sharethis-inline-reaction-buttons" data-url="http://edondo.me/complaint/{{ com.id }}"></div>
-                        <br>
-                        <textarea class="form-control" name="comment" rows="4" minlength="10" ></textarea>
-                        <button type="submit" class="btn btn-success btn-embossed">SEND</button>
-                        <br>
-                    <div class="sharethis-inline-share-buttons"
-                             data-url="http://edondo.me/complaint/{{ com.id }}"></div>
-                    </form>
+                    {% if request.user.is_authenticated %}
+                        <p>Add yours</p>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                             <div class="sharethis-inline-reaction-buttons" data-url="http://edondo.me/complaint/{{ com.id }}"></div>
+                            <br>
+                            <textarea class="form-control" name="comment" rows="4" minlength="10"></textarea>
+                            <button type="submit" class="btn btn-success btn-embossed">SEND</button>
+                            <br>
+                            <div class="sharethis-inline-share-buttons"
+                                 data-url="http://edondo.me/complaint/{{ com.id }}"></div>
+                        </form>
                     {% else %}
-                    <p>You must be logged in to comment</p>
-                {% endif %}
+                        <p>You must be logged in to comment</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
