@@ -2,6 +2,7 @@
 {% load filters %}
 {% load el_pagination_tags %}
 <!DOCTYPE html>
+<!-- Microdata markup added by Google Structured Data Markup Helper. -->
 <html lang="en">
 
 <head>
@@ -77,12 +78,12 @@
 
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('/static/app/img/home-bg.png')">
+<header  itemscope itemtype="http://schema.org/LocalBusiness" class="intro-header" style="background-image: url('/static/app/img/home-bg.png')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>E don do me</h1>
+                    <h1 itemprop="name">E don do me</h1>
                     <hr class="small">
                     <span class="subheading">Wetin don tire you?</span>
                     {% if not request.user.is_authenticated %}
@@ -108,6 +109,9 @@
             </div>
         </div>
     </div>
+    <meta itemprop="image" content="http://www.edondo.me/static/app/img/home-bg.png">
+<meta itemprop="url" content="http://edondo.me/">
+<meta itemprop="email" content="contact@davidmadethis.com">
 </header>
 
 <!-- Main Content -->
