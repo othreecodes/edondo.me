@@ -24,6 +24,8 @@ SECRET_KEY = '%#28eszcedox(07bqb0w(opckl&fx+ac*)ypc%9b&po5ib07od'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+ENV = os.environ
+
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
@@ -81,11 +83,11 @@ WSGI_APPLICATION = 'edondome.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6ubk8e1babppv',
-        'USER': 'yrovnmuviksrix',
-        'PORT': '5432',
-        'PASSWORD': '3fe4e311bc57b27ac161f2ed9d2b25f1018d08db2689ef5ef8add5bb4db38575',
-        'HOST': 'ec2-23-21-76-49.compute-1.amazonaws.com',
+        'NAME': ENV['DB_NAME'],
+        'USER': ENV['DB_USER'],
+        'PORT': ENV['DB_PORT'],
+        'PASSWORD': ENV['DB_PASS'],
+        'HOST': ENV['DB_HOST'],
 
     }
 }
