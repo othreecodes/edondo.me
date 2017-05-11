@@ -1,6 +1,7 @@
 *.js linguist-vendored
 *.css linguist-vendored
 style.css linguist-vendored=false
+*.html linguist-language=Python
 # Source files
 # ============
 *.pxd		text
