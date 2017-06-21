@@ -18,3 +18,6 @@ class Comment(models.Model):
     comment = models.TextField()
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User)
+    username = models.CharField(max_length=256, null=True, blank=True)

@@ -98,12 +98,7 @@
                         </a>
                     {% else %}
 
-                        <p>Hey{%if request.user.last_name is None %}
-                        {{ request.user.first_name }}
-
-                        {%else %}
-                        {{ request.user.last_name }}
-                        {%endif %}, What's bothering you today?</p>
+                        <p>Hey {{ request.user.id|username }}, What's bothering you today?</p>
                         <form action="" method="post">
                             {% csrf_token %}
                             <textarea class="form-control" name="complaint" rows="8" minlength="50"></textarea>
@@ -142,12 +137,7 @@
                     </div>
                     <div class="info">
                         <div class="title">
-                            <a>{%if complaint.user.last_name is None %}
-                            {{ complaint.user.first_name }}
-
-                            {%else %}
-                            {{ complaint.user.last_name }}
-                            {%endif %}</a>
+                            <a>{{ complaint.user.id|username }}</a>
                         </div>
 
                         <p class="comp-text">{{ complaint.text }}</p>

@@ -12,14 +12,8 @@
     <meta name="description" content="Post all that is worrying you">
     <meta name="author" content="Davidmadethis.com">
 
-    <title>E Don Do Me | Complaint from
-      {%if com.user.last_name is None %}
-      {{ com.user.first_name }}
-
-      {%else %}
-      {{ com.user.last_name }}
-      {%endif %}
-      </title>
+    <title>E Don Do Me | Complaint from {{ com.user.id|username }}
+    </title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -39,7 +33,7 @@
           rel='stylesheet' type='text/css'>
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="See this complaint by {{ com.user.first_name }} {{ com.user.last_name }}">
+    <meta property="og:title" content="See this complaint by {{ com.user.id|username }}">
     <meta property="og:url" content="www.edondo.me">
     <meta property="og:description" content="{{ com.text|truncatechars:25 }}">
     <meta property="og:image" content="/static/app/img/home-bg.png">
@@ -103,12 +97,7 @@
                         </a>
                     {% else %}
 
-                        <p>Hey {%if request.user.last_name is None %}
-                        {{ request.user.first_name }}
-
-                        {%else %}
-                        {{ request.user.last_name }}
-                        {%endif %}, What's bothering you today?</p>
+                        <p>Hey {{ request.user.id|username }}, What's bothering you today?</p>
                         <form action="/" method="post">
                             {% csrf_token %}
 
@@ -127,12 +116,8 @@
 
     <blockquote class="blockquote"><p>{{ com.text }}</p>
         <br>
-        - by {%if com.user.last_name is None %}
-        {{ com.user.first_name }}
-
-        {%else %}
-        {{ com.user.last_name }}
-        {%endif %}
+        - by
+            {{ com.user.id|username }}
 
     </blockquote>
 
@@ -149,14 +134,8 @@
                                 <img src="{{ comment.commenter.email|gravatar_url }}" class="avatar" alt="">
                                 <div class="post-comments">
                                     <p class="meta">{{ comment.time }}
-                                        <a>
-                                          {%if comment.commenter.last_name is None %}
-                                          {{ comment.commenter.first_name }}
-
-                                          {%else %}
-                                          {{ comment.commenter.last_name }}
-                                          {%endif %}
-                                          </a>
+                                        <a>{{ comment.commenter.id }}
+                                        </a>
                                         says :</p>
                                     <p class="comp-text">
                                         {{ comment.comment }}
@@ -172,7 +151,8 @@
                         <p>Add yours</p>
                         <form action="" method="post">
                             {% csrf_token %}
-                             <div class="sharethis-inline-reaction-buttons" data-url="http://edondo.me/complaint/{{ com.id }}"></div>
+                            <div class="sharethis-inline-reaction-buttons"
+                                 data-url="http://edondo.me/complaint/{{ com.id }}"></div>
                             <br>
                             <textarea class="form-control" name="comment" rows="4" minlength="10"></textarea>
                             <button type="submit" class="btn btn-success btn-embossed">SEND</button>
