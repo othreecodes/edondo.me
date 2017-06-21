@@ -12,7 +12,14 @@
     <meta name="description" content="Post all that is worrying you">
     <meta name="author" content="Davidmadethis.com">
 
-    <title>E Do Me | Complaint from {{ com.user.first_name }} {{ com.user.last_name }}</title>
+    <title>E Don Do Me | Complaint from
+      {%if com.user.last_name is None %}
+      {{ com.user.first_name }}
+
+      {%else %}
+      {{ com.user.last_name }}
+      {%endif %}
+      </title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -96,7 +103,12 @@
                         </a>
                     {% else %}
 
-                        <p>Hey {{ request.user.first_name }}, What's bothering you today?</p>
+                        <p>Hey {%if request.user.last_name is None %}
+                        {{ request.user.first_name }}
+
+                        {%else %}
+                        {{ request.user.last_name }}
+                        {%endif %}, What's bothering you today?</p>
                         <form action="/" method="post">
                             {% csrf_token %}
 
@@ -115,7 +127,12 @@
 
     <blockquote class="blockquote"><p>{{ com.text }}</p>
         <br>
-        - by {{ com.user.first_name }} {{ com.user.last_name }}
+        - by {%if com.user.last_name is None %}
+        {{ com.user.first_name }}
+
+        {%else %}
+        {{ com.user.last_name }}
+        {%endif %}
 
     </blockquote>
 
@@ -132,7 +149,14 @@
                                 <img src="{{ comment.commenter.email|gravatar_url }}" class="avatar" alt="">
                                 <div class="post-comments">
                                     <p class="meta">{{ comment.time }}
-                                        <a>{{ comment.commenter.first_name }} {{ comment.commenter.last_name }}</a>
+                                        <a>
+                                          {%if comment.commenter.last_name is None %}
+                                          {{ comment.commenter.first_name }}
+
+                                          {%else %}
+                                          {{ comment.commenter.last_name }}
+                                          {%endif %}
+                                          </a>
                                         says :</p>
                                     <p class="comp-text">
                                         {{ comment.comment }}
