@@ -134,7 +134,7 @@
                                 <img src="{{ comment.commenter.email|gravatar_url }}" class="avatar" alt="">
                                 <div class="post-comments">
                                     <p class="meta">{{ comment.time }}
-                                        <a>{{ comment.commenter.id }}
+                                        <a>{{ comment.commenter.id|username }}
                                         </a>
                                         says :</p>
                                     <p class="comp-text">
