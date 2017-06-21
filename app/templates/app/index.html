@@ -1,6 +1,7 @@
 {% load static %}
 {% load filters %}
 {% load el_pagination_tags %}
+{% load humanize %}
 <!DOCTYPE html>
 <!-- Microdata markup added by Google Structured Data Markup Helper. -->
 <html lang="en">
@@ -130,7 +131,7 @@
                                style="padding: 5px">&times;</a>
                         {% endif %}
                      <a href="/complaint/{{ complaint.id }}" class="btn btn-embossed btn-success btn-sm pull-left"
-                               style="padding: 5px"><i class="fa fa-eye"></i></a>
+                               style="padding: 5px"><i class="fa fa-calendar"></i> <span class="label">{{ complaint.time|naturaltime }}</span></a>
                     </div>
                     <div class="avatar">
                         <img alt="" src="{{ complaint.user.email|gravatar_url }}">
