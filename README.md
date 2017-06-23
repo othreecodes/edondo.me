@@ -12,4 +12,4 @@ It was inspired by this video
 
 <img src="https://github.com/othreecodes/edondo.me/raw/master/Screenshot%20from%202017-05-05%2008-48-23.png">
 
-<img src="https://github.com/othreecodes/edondo.me/raw/master/Screenshot%20from%202017-05-05%2008-29-48.png">
+<img src="https://github.com/othreecodes/edondo.me/raw/master/Screenshot%20from%202017-06-23%2023-16-59.png">
