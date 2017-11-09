@@ -217,10 +217,8 @@ NAME_LIST = names.split("\n")
 # TEMPLATE USE:  {{ email|gravatar_url:150 }}
 @register.filter
 def gravatar_url(email, size=150):
-    default = "https://lh3.googleusercontent.com/-Ybz8OAwoVxg/AAAAAAAAAAI/AAAAAAAAAAA/hNDTT4sTJrw/s181-c/114068962698415999808.jpg"
-    return "https://www.gravatar.com/avatar/%s?%s" % (
-        hashlib.md5(email.lower().encode('utf-8')).hexdigest(), urllib.parse.urlencode({'d': default, 's': str(size)}))
-
+    url = "https://api.adorable.io/avatars/150/{}.png".format(email)
+    return url
 
 # return an image tag with the gravatar
 # TEMPLATE USE:  {{ email|gravatar:150 }}
