@@ -134,7 +134,7 @@
                                style="padding: 5px"><i class="fa fa-calendar"></i> <span class="label">{{ complaint.time|naturaltime }}</span></a>
                     </div>
                     <div class="avatar">
-                        <img alt="" src="{{ complaint.user.email|gravatar_url }}">
+                        <img alt="" src="{{ complaint.user.id|username|gravatar_url }}">
                     </div>
                     <div class="info">
                         <div class="title">
