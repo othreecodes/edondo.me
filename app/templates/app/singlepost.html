@@ -131,7 +131,7 @@
                     <ul class="comments">
                         {% for comment in com.comment_set.all %}
                             <li class="clearfix">
-                                <img src="{{ comment.commenter.email|gravatar_url }}" class="avatar" alt="">
+                                <img src="{{ comment.commenter.id|username|gravatar_url }}" class="avatar" alt="">
                                 <div class="post-comments">
                                     <p class="meta">{{ comment.time }}
                                         <a>{{ comment.commenter.id|username }}
