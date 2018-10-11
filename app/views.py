@@ -3,7 +3,7 @@ import urllib
 
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-
+from django.shortcuts import Http404
 from .models import *
 from django.contrib.auth import logout
 from django.http.response import HttpResponse
@@ -20,6 +20,7 @@ class IndexView(ListView):
 
     def post(self, request):
         complaint = request.POST.get('complaint') or None
+        
         if complaint is None or not request.user.is_authenticated:
             pass
         else:
@@ -29,8 +30,16 @@ class IndexView(ListView):
             context = {
                 "complaints": complaint
             }
+            
         return render(request, 'app/index.html', context)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context["comments"] = Comment.objects.filter(complaint__user__id = self.request.user.id).count()
+        
+        return context
+    
 
 def delete(request):
     id = request.GET.get("id") or None
@@ -62,3 +71,12 @@ def single(request, pk):
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+
+def comments(request):
+    if not request.user.is_authenticated:
+        raise Http404
+    
+    comments = Comment.objects.filter(complaint__user__id = request.user.id).select_related("complaint")
+ 
+    return render(request, 'app/comments.html', {"comments":comments})

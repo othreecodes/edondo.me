@@ -13,7 +13,7 @@
     <meta name="description" content="Post all that is worrying you">
     <meta name="author" content="Davidmadethis.com">
 
-    <title>E Don Do Me | Complaint from {{ com.user.id|username }}
+    <title>E Don Do Me | Replies to your complaints
     </title>
 
     <!-- Bootstrap Core CSS -->
@@ -34,10 +34,9 @@
           rel='stylesheet' type='text/css'>
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="See this complaint by {{ com.user.id|username }}">
+    <meta property="og:title" content="View replies">
     <meta property="og:url" content="www.edondo.me">
-    <meta property="og:description" content="{{ com.text|truncatechars:25 }}">
-    <meta property="og:image" content="{{ com.user.id|username|gravatar_url }}">
+    <meta property="og:description" content="View replies">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -79,7 +78,7 @@
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
 <header class="intro-header" style="background-image: url('/static/app/img/home-bg.png')">
-    <div class="container">
+   <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
@@ -96,22 +95,18 @@
 
 <!-- Main Content -->
 <div class="container">
-    &nbsp;&nbsp;<span class="label label-default"><i class="fa fa-calendar"></i>&nbsp;{{ com.time|naturaltime }}</span>
-
-    <blockquote class="blockquote"><p>{{ com.text }}</p>
-        <br>
-        - by {{ com.user.id|username }}
-    </blockquote>
+   
 
     <div class="bootstrap snippet">
         <div class="row">
             <div class="col-md-12">
                 <div class="blog-comment">
-                    <h3 class="text-success">Responses</h3>
+                    <h3 class="text-success">All Responses</h3>
                     <hr/>
 
                     <ul class="comments">
-                        {% for comment in com.comment_set.all %}
+                 
+                        {% for comment in comments %}
                             <li class="clearfix">
                                 <img src="{{ comment.commenter.id|username|gravatar_url }}" class="avatar" alt="">
                                 <div class="post-comments">
@@ -122,29 +117,15 @@
                                     <p class="comp-text">
                                         {{ comment.comment }}
                                     </p>
+                                    <a href="/complaint/{{ comment.complaint.id }}" class="btn-sm btn btn-success"> View Complaint</a>
                                 </div>
                             </li>
                         {% empty %}
-                            <div class="alert alert-info">No comments yet</div>
+                            <div class="alert alert-info">No Responses yet</div>
                         {% endfor %}
 
                     </ul>
-                    {% if request.user.is_authenticated %}
-                        <p>Add yours</p>
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <div class="sharethis-inline-reaction-buttons"
-                                 data-url="http://edondo.me/complaint/{{ com.id }}"></div>
-                            <br>
-                            <textarea class="form-control" name="comment" rows="4" minlength="10"></textarea>
-                            <button type="submit" class="btn btn-success btn-embossed">SEND</button>
-                            <br>
-                            <div class="sharethis-inline-share-buttons"
-                                 data-url="http://edondo.me/complaint/{{ com.id }}"></div>
-                        </form>
-                    {% else %}
-                        <p>You must be logged in to comment</p>
-                    {% endif %}
+                  
                 </div>
             </div>
         </div>

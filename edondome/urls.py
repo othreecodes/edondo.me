@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', view=views.IndexView.as_view(), name='index'),
     url(r'^delete/$', view=views.delete, name='delete'),
     url(r'^logout/$', view=views.logout_user, name='logout'),
+    url(r'^comments/$', view=views.comments, name='comments'),
     url(r'^complaint/(?P<pk>[0-9]+)/$', view=views.single, name='view')
 ]
 urlpatterns += staticfiles_urlpatterns()

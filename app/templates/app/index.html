@@ -28,10 +28,11 @@
 
     <!-- Custom Fonts -->
     <link href="{% static 'app/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+    {% comment %} <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
+          rel='stylesheet' type='text/css'> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="E don do me">
@@ -53,24 +54,25 @@
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " style="opacity: 0">
+<nav class="navbar navbar-inverse navbar-fixed-top ">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        {#            <div class="navbar-header page-scroll">#}
-        {#                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">#}
-        {#                    <span class="sr-only">Toggle navigation</span>#}
-        {#                    Menu <i class="fa fa-bars"></i>#}
-        {#                </button>#}
-        {#                <a class="navbar-brand" href="index.html">E don do me</a>#}
-        {#            </div>#}
+                 <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            Menu <i class="fa fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand" href="index.html">E don do me</a>
+                    </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                {#                    <li>#}
-                {#                        <a href="index.html">Home</a>#}
-                {#                    </li>#}
-
+                <li>  <a href="/">Home</a>  </li>
+                {%if request.user.is_authenticated%}
+                <li>  <a href="/logout/">Logout</a>  </li>
+                <li>  <a href="/comments/">Comments ({{comments}})</a>  </li>
+                {%endif%}
                 
             </ul>
         </div>
@@ -124,8 +126,11 @@
     {% paginate complaints %}
     <div class="row">
         {% for complaint in complaints %}
-            <div class="col-lg-3 col-sm-6" id="complaint-{{ complaint.id }}">
 
+
+       
+            <div class="col-lg-3 col-sm-6" id="complaint-{{ complaint.id }}">
+            
                 <div class="card hovercard">
                     <div class="cardheader" style="background: url('/static/app/img/{{ request|get_random_image }}')">
                         {% if request.user == complaint.user or request.user.is_staff %}
@@ -136,7 +141,9 @@
                                style="padding: 5px"><i class="fa fa-calendar"></i> <span class="label">{{ complaint.time|naturaltime }}</span></a>
                     </div>
                     <div class="avatar">
+                        <a href="/complaint/{{ complaint.id }}">
                         <img alt="" src="{{ complaint.user.id|username|gravatar_url }}">
+                        </a>
                     </div>
                     <div class="info">
                         <div class="title">
@@ -147,13 +154,22 @@
                         <div class="sharethis-inline-share-buttons"
                              data-url="http://edondo.me/complaint/{{ complaint.id }}"></div>
 
-                        <a href="http://edondo.me/complaint/{{ complaint.id }}" class="btn btn-sm btn-default pull-left comment-btn"><i class="fa fa-comment"></i>{{ complaint.comment_set.all.count }}</a>
+                        <a href="http://edondo.me/complaint/{{ complaint.id }}" class="btn btn-md btn-default pull-left comment-btn"><i class="fa fa-comment"></i> 
+                        
+                            {% with total=complaint.comment_set.all.count %}
+                                    {{ total }} Comment{{ total|pluralize }}
+                          {% endwith %}
+                        
+                        
+                        
+                        
+                        </a>
                     </div>
                 </div>
 
 
             </div>
-
+        
             {% cycle '' '' '' '<div class="clearfix"></div>' %}
         {% endfor %}
 
