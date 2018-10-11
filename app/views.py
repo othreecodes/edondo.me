@@ -57,3 +57,8 @@ def single(request, pk):
     }
 
     return render(request, 'app/singlepost.html', context)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('index')

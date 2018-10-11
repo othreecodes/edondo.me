@@ -24,6 +24,7 @@ urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
     url(r'^$', view=views.IndexView.as_view(), name='index'),
     url(r'^delete/$', view=views.delete, name='delete'),
+    url(r'^logout/$', view=views.logout_user, name='logout'),
     url(r'^complaint/(?P<pk>[0-9]+)/$', view=views.single, name='view')
 ]
 urlpatterns += staticfiles_urlpatterns()
