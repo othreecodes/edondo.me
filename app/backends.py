@@ -7,9 +7,9 @@ from firebase_admin import auth
 import os
 from django.conf import settings
 from app.templatetags.filters import username as generate_profile
-# json = os.path.join(settings.KEYFILES_DIR, settings.FIREBASE_KEY)
-# cred = credentials.Certificate(json)
-# # default_app = firebase_admin.initialize_app(cred)
+json = os.path.join(settings.KEYFILES_DIR, settings.FIREBASE_KEY)
+cred = credentials.Certificate(json)
+default_app = firebase_admin.initialize_app(cred)
 
 
 class CustomFirebaseAuthentication(authentication.BaseAuthentication):
