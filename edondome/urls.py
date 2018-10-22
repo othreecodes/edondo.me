@@ -16,16 +16,22 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from rest_framework.routers import DefaultRouter
+from app import views,api
+routes = DefaultRouter()
 
-from app import views
+routes.register(r'complaint',api.ComplaintViewSet,"complaint")
+routes.register(r'comment',api.CommentViewSet,"comment")
 
 urlpatterns = [
+    url(r'api/v1/',include(routes.urls)),
     url(r'^admin/', admin.site.urls),
     url('', include('social_django.urls', namespace='social')),
     url(r'^$', view=views.IndexView.as_view(), name='index'),
     url(r'^delete/$', view=views.delete, name='delete'),
     url(r'^logout/$', view=views.logout_user, name='logout'),
     url(r'^comments/$', view=views.comments, name='comments'),
-    url(r'^complaint/(?P<pk>[0-9]+)/$', view=views.single, name='view')
+    url(r'^complaint/(?P<pk>[0-9]+)/$', view=views.single, name='view'),
+    
 ]
 urlpatterns += staticfiles_urlpatterns()

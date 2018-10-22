@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%#28eszcedox(07bqb0w(opckl&fx+ac*)ypc%9b&po5ib07od'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ENV = os.environ
@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'social_django',
     'el_pagination',
-    'app'
+    'rest_framework',
+    'app',
+    'firebase_auth'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +83,7 @@ WSGI_APPLICATION = 'edondome.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-#
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -174,3 +176,15 @@ SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 SECURE_SSL_REDIRECT = True
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('firebase_auth.authentication.FirebaseAuthentication', ),
+    'DATETIME_FORMAT': "%Y-%m-%d %H:%M",
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 50,
+    
+}
+
+APPEND_SLASH = False
+KEYFILES_DIR = os.path.join(BASE_DIR, 'keyfiles')
+FIREBASE_KEY = 'edondome-165419-firebase-adminsdk-nxf5m-53cce390fd.json'
