@@ -14,10 +14,10 @@ class BaseViewSet(ModelViewSet):
 
 
 class CommentViewSet(BaseViewSet):
-    queryset = models.Comment.objects.all()
+    queryset = models.Comment.objects.all().order_by('-id')
     serializer_class = CommentSerializer
 
 
 class ComplaintViewSet(BaseViewSet):
-    queryset = models.Complaint.objects.all()
+    queryset = models.Complaint.objects.all().order_by('-id')
     serializer_class = ComplaintSerializer
