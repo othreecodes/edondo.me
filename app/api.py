@@ -7,9 +7,10 @@ from app.backends import CustomFirebaseAuthentication
 from app.serializers import CommentSerializer, ComplaintSerializer
 
 
+
 class BaseViewSet(ModelViewSet):
     permission_classes = (IsAuthenticated,)
-    authentication_classes = (CustomFirebaseAuthentication, BasicAuthentication)
+    authentication_classes = (CustomFirebaseAuthentication,)
 
 
 class CommentViewSet(BaseViewSet):

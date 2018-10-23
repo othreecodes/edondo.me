@@ -16,6 +16,7 @@ class CustomFirebaseAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         id_token = request.META.get('HTTP_AUTHORIZATION')
         decoded_token = None
+        
         try:
             decoded_token = auth.verify_id_token(id_token)
         except Exception as e:
@@ -26,7 +27,7 @@ class CustomFirebaseAuthentication(authentication.BaseAuthentication):
 
         uid = decoded_token.get('uid')
         try:
-            user = User.objects.get(username=uid)
+            user,_ = User.objects.get_or_create(username=uid)
             generate_profile(user.id)
         except User.DoesNotExist:
             raise exceptions.AuthenticationFailed('The user does not exist')
